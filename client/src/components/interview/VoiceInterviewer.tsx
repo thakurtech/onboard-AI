@@ -97,7 +97,8 @@ export const VoiceInterviewer: React.FC<VoiceInterviewerProps> = ({ onClose }) =
         toast.loading('Starting your interview...', { id: 'interview' });
 
         try {
-            const res = await fetch('http://localhost:5000/api/interviewer/start', {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+            const res = await fetch(`${API_URL}/api/interviewer/start`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -123,7 +124,8 @@ export const VoiceInterviewer: React.FC<VoiceInterviewerProps> = ({ onClose }) =
         setIsProcessing(true);
 
         try {
-            const res = await fetch('http://localhost:5000/api/interviewer/answer', {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+            const res = await fetch(`${API_URL}/api/interviewer/answer`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ answer }),
@@ -145,7 +147,8 @@ export const VoiceInterviewer: React.FC<VoiceInterviewerProps> = ({ onClose }) =
         toast.loading('Generating feedback...', { id: 'conclude' });
 
         try {
-            const res = await fetch('http://localhost:5000/api/interviewer/conclude', {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+            const res = await fetch(`${API_URL}/api/interviewer/conclude`, {
                 method: 'POST',
             });
 
@@ -307,8 +310,8 @@ export const VoiceInterviewer: React.FC<VoiceInterviewerProps> = ({ onClose }) =
                                         >
                                             <div
                                                 className={`max-w-[80%] p-4 rounded-2xl ${msg.role === 'interviewer'
-                                                        ? 'bg-white/5 border border-white/10'
-                                                        : 'bg-gradient-to-r from-blue-600 to-violet-600'
+                                                    ? 'bg-white/5 border border-white/10'
+                                                    : 'bg-gradient-to-r from-blue-600 to-violet-600'
                                                     }`}
                                             >
                                                 <div className="text-xs text-gray-400 mb-1">
@@ -339,8 +342,8 @@ export const VoiceInterviewer: React.FC<VoiceInterviewerProps> = ({ onClose }) =
                                     onClick={toggleListening}
                                     disabled={isProcessing}
                                     className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center transition-all ${isListening
-                                            ? 'bg-gradient-to-r from-red-600 to-red-700 animate-pulse scale-110'
-                                            : 'bg-white/10 hover:bg-white/20 border border-white/20'
+                                        ? 'bg-gradient-to-r from-red-600 to-red-700 animate-pulse scale-110'
+                                        : 'bg-white/10 hover:bg-white/20 border border-white/20'
                                         }`}
                                 >
                                     {isListening ? (

@@ -70,7 +70,8 @@ export const FileUploader: React.FC = () => {
             const formData = new FormData();
             formData.append('file', file);
 
-            const response = await fetch('http://localhost:5000/api/onboarding/generate', {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+            const response = await fetch(`${API_URL}/api/onboarding/generate`, {
                 method: 'POST',
                 body: formData,
             });
@@ -100,8 +101,8 @@ export const FileUploader: React.FC = () => {
             >
                 <div
                     className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all ${dragActive
-                            ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/20'
-                            : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600'
+                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/20'
+                        : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600'
                         }`}
                     onDragEnter={handleDrag}
                     onDragLeave={handleDrag}

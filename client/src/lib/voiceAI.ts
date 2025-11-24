@@ -7,7 +7,8 @@ export interface VoiceMessage {
 
 export const processVoiceInput = async (input: string): Promise<string> => {
     try {
-        const response = await fetch('http://localhost:5000/api/ai/chat', {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${API_URL}/api/ai/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: input }),
@@ -27,7 +28,8 @@ export const processVoiceInput = async (input: string): Promise<string> => {
 
 export const resetVoiceHistory = async (): Promise<void> => {
     try {
-        await fetch('http://localhost:5000/api/ai/chat', {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        await fetch(`${API_URL}/api/ai/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ resetHistory: true }),
